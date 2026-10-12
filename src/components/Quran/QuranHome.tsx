@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { motion } from 'motion/react';
 import { SurahMeta, BookmarkItem, LastReadItem } from '../../types/quran';
 import { SURAH_LIST } from '../../data/surahList';
 import { Search, BookMarked, History, BookOpen, ChevronRight, Sparkles, ArrowLeft } from 'lucide-react';
@@ -190,10 +191,12 @@ export const QuranHome: React.FC<QuranHomeProps> = ({
       {/* Surahs List (Clean White Cards matching image.png card motif) */}
       <div className="space-y-2.5">
         {filteredSurahs.map((surah) => (
-          <button
+          <motion.button
             key={surah.number}
+            whileHover={{ scale: 1.01, y: -1 }}
+            whileTap={{ scale: 0.99 }}
             onClick={() => onSelectSurah(surah.number)}
-            className="w-full bg-white hover:bg-slate-50 text-slate-900 rounded-2xl p-4 shadow-sm border border-slate-100 flex items-center justify-between transition-all active:scale-[0.99] group text-left"
+            className="w-full bg-white hover:bg-slate-50 text-slate-900 rounded-2xl p-4 shadow-sm border border-slate-100 flex items-center justify-between transition-shadow cursor-pointer group text-left"
           >
             <div className="flex items-center gap-3.5">
               <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-800 group-hover:bg-amber-50 group-hover:text-amber-800 flex items-center justify-center font-mono font-bold text-xs transition-colors shrink-0">
@@ -217,7 +220,7 @@ export const QuranHome: React.FC<QuranHomeProps> = ({
                 {surah.nameArabic}
               </span>
             </div>
-          </button>
+          </motion.button>
         ))}
 
         {filteredSurahs.length === 0 && (

@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { LocationInfo, CalculationSettings } from '../../types/prayer';
 import { calculateDayPrayerTimes, getHijriDate } from '../../utils/prayerTimes';
 import {
@@ -164,11 +165,25 @@ export const MonthlyScheduleModal: React.FC<MonthlyScheduleModalProps> = ({
     }, 1200);
   };
 
-  if (!isOpen) return null;
-
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-      <div className="bg-[#0c251f] w-full max-w-4xl rounded-3xl shadow-2xl border border-emerald-900/80 text-white overflow-hidden flex flex-col max-h-[90vh] relative">
+    <AnimatePresence>
+      {isOpen && (
+        <div className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={onClose}
+            className="fixed inset-0 bg-slate-950/80 backdrop-blur-md cursor-pointer"
+          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.94, y: 16 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 12 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 320 }}
+            className="relative bg-[#0c251f] w-full max-w-4xl rounded-3xl shadow-2xl border border-emerald-900/80 text-white overflow-hidden flex flex-col max-h-[90vh] z-10"
+          >
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-emerald-900/60 bg-[#12312b]">
           <div className="flex items-center gap-3">
@@ -457,8 +472,11 @@ export const MonthlyScheduleModal: React.FC<MonthlyScheduleModalProps> = ({
             </div>
           </div>
         )}
+        </motion.div>
       </div>
-    </div>
+      )}
+    </AnimatePresence>
   );
 };
+
 

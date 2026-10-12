@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'motion/react';
 import { Compass, Moon, BookOpen, Clock, Heart, Sparkles, Settings, Home, Grid, Trophy } from 'lucide-react';
 import { PWAInstallButton } from './PWA/PWAInstallButton';
 
@@ -24,9 +25,11 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-8 h-16">
             {/* Zone 1: Brand title */}
-            <button
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.96 }}
               onClick={() => onTabChange('prayer')}
-              className="flex items-center gap-2.5 text-left focus:outline-none group shrink-0"
+              className="flex items-center gap-2.5 text-left focus:outline-none group shrink-0 cursor-pointer"
             >
               <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-400 to-emerald-500 flex items-center justify-center text-slate-950 font-bold shadow-md shadow-emerald-950/40 group-hover:scale-105 transition-transform">
                 <Moon className="w-5 h-5 fill-current" />
@@ -39,13 +42,15 @@ export const Navbar: React.FC<NavbarProps> = ({
                   by Fluttydev
                 </span>
               </div>
-            </button>
+            </motion.button>
 
             {/* Zone 2: 4-5 concise single-line nav links */}
             <nav className="hidden md:flex items-center gap-2 text-sm font-medium">
-              <button
+              <motion.button
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => onTabChange('prayer')}
-                className={`flex items-center gap-1.5 transition-all whitespace-nowrap px-4 py-2 rounded-full ${
+                className={`flex items-center gap-1.5 transition-all whitespace-nowrap px-4 py-2 rounded-full cursor-pointer ${
                   activeTab === 'prayer'
                     ? 'bg-amber-400 text-slate-950 font-bold shadow-sm'
                     : 'text-emerald-100 hover:text-white hover:bg-white/5'
@@ -53,11 +58,13 @@ export const Navbar: React.FC<NavbarProps> = ({
               >
                 <Home className="w-4 h-4" />
                 <span>Home</span>
-              </button>
+              </motion.button>
 
-              <button
+              <motion.button
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => onTabChange('qibla')}
-                className={`flex items-center gap-1.5 transition-all whitespace-nowrap px-4 py-2 rounded-full ${
+                className={`flex items-center gap-1.5 transition-all whitespace-nowrap px-4 py-2 rounded-full cursor-pointer ${
                   activeTab === 'qibla'
                     ? 'bg-amber-400 text-slate-950 font-bold shadow-sm'
                     : 'text-emerald-100 hover:text-white hover:bg-white/5'
@@ -65,11 +72,13 @@ export const Navbar: React.FC<NavbarProps> = ({
               >
                 <Compass className="w-4 h-4" />
                 <span>Qibla Compass</span>
-              </button>
+              </motion.button>
 
-              <button
+              <motion.button
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => onTabChange('quran')}
-                className={`flex items-center gap-1.5 transition-all whitespace-nowrap px-4 py-2 rounded-full ${
+                className={`flex items-center gap-1.5 transition-all whitespace-nowrap px-4 py-2 rounded-full cursor-pointer ${
                   activeTab === 'quran'
                     ? 'bg-amber-400 text-slate-950 font-bold shadow-sm'
                     : 'text-emerald-100 hover:text-white hover:bg-white/5'
@@ -77,11 +86,13 @@ export const Navbar: React.FC<NavbarProps> = ({
               >
                 <BookOpen className="w-4 h-4" />
                 <span>Al-Qur'an</span>
-              </button>
+              </motion.button>
 
-              <button
+              <motion.button
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => onTabChange('tasbih')}
-                className={`flex items-center gap-1.5 transition-all whitespace-nowrap px-4 py-2 rounded-full ${
+                className={`flex items-center gap-1.5 transition-all whitespace-nowrap px-4 py-2 rounded-full cursor-pointer ${
                   activeTab === 'tasbih'
                     ? 'bg-amber-400 text-slate-950 font-bold shadow-sm'
                     : 'text-emerald-100 hover:text-white hover:bg-white/5'
@@ -89,11 +100,13 @@ export const Navbar: React.FC<NavbarProps> = ({
               >
                 <Sparkles className="w-4 h-4" />
                 <span>Tasbih</span>
-              </button>
+              </motion.button>
 
-              <button
+              <motion.button
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => onTabChange('duas')}
-                className={`flex items-center gap-1.5 transition-all whitespace-nowrap px-4 py-2 rounded-full ${
+                className={`flex items-center gap-1.5 transition-all whitespace-nowrap px-4 py-2 rounded-full cursor-pointer ${
                   activeTab === 'duas'
                     ? 'bg-amber-400 text-slate-950 font-bold shadow-sm'
                     : 'text-emerald-100 hover:text-white hover:bg-white/5'
@@ -101,11 +114,13 @@ export const Navbar: React.FC<NavbarProps> = ({
               >
                 <Heart className="w-4 h-4" />
                 <span>Doa & Asmaul</span>
-              </button>
+              </motion.button>
 
-              <button
+              <motion.button
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => onTabChange('quiz')}
-                className={`flex items-center gap-1.5 transition-all whitespace-nowrap px-4 py-2 rounded-full ${
+                className={`flex items-center gap-1.5 transition-all whitespace-nowrap px-4 py-2 rounded-full cursor-pointer ${
                   activeTab === 'quiz'
                     ? 'bg-amber-400 text-slate-950 font-bold shadow-sm'
                     : 'text-emerald-100 hover:text-white hover:bg-white/5'
@@ -113,11 +128,13 @@ export const Navbar: React.FC<NavbarProps> = ({
               >
                 <Trophy className="w-4 h-4" />
                 <span>Kuis Islami</span>
-              </button>
+              </motion.button>
 
-              <button
+              <motion.button
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => onTabChange('umrah')}
-                className={`flex items-center gap-1.5 transition-all whitespace-nowrap px-4 py-2 rounded-full ${
+                className={`flex items-center gap-1.5 transition-all whitespace-nowrap px-4 py-2 rounded-full cursor-pointer ${
                   activeTab === 'umrah'
                     ? 'bg-amber-400 text-slate-950 font-bold shadow-sm'
                     : 'text-emerald-100 hover:text-white hover:bg-white/5'
@@ -125,35 +142,38 @@ export const Navbar: React.FC<NavbarProps> = ({
               >
                 <span className="text-sm">🕋</span>
                 <span>Panduan Umroh</span>
-              </button>
+              </motion.button>
             </nav>
 
             {/* Zone 3: 1 Primary Action */}
             <div className="flex items-center gap-2.5 shrink-0">
               <PWAInstallButton />
-              <button
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.94 }}
                 onClick={onOpenSettings}
-                className="flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold text-emerald-100 bg-[#12312b] hover:bg-[#183d35] border border-emerald-800/60 rounded-full transition-colors whitespace-nowrap shrink-0 shadow-sm"
+                className="flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold text-emerald-100 bg-[#12312b] hover:bg-[#183d35] border border-emerald-800/60 rounded-full transition-colors whitespace-nowrap shrink-0 shadow-sm cursor-pointer"
                 title="Pengaturan"
               >
                 <Settings className="w-3.5 h-3.5 text-amber-400" />
                 <span className="hidden sm:inline">{cityName || 'Pengaturan'}</span>
                 <span className="sm:hidden">Opsi</span>
-              </button>
+              </motion.button>
             </div>
           </div>
         </div>
       </header>
 
-      {/* Floating Bottom Navigation Bar (exact match to image.png) */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#091f1a]/95 backdrop-blur-xl border-t border-emerald-900/50 px-3 py-2">
+      {/* Floating Bottom Navigation Bar */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#091f1a]/95 backdrop-blur-xl border-t border-emerald-900/50 px-3 py-2 shadow-2xl">
         <div className="max-w-md mx-auto flex items-center justify-around">
           {/* 1. Home */}
-          <button
+          <motion.button
+            whileTap={{ scale: 0.9 }}
             onClick={() => onTabChange('prayer')}
-            className={`flex items-center justify-center transition-all ${
+            className={`flex items-center justify-center transition-all cursor-pointer ${
               activeTab === 'prayer'
-                ? 'bg-amber-400 text-slate-950 font-extrabold px-4 py-2 rounded-full shadow-lg shadow-amber-400/20 text-xs gap-1.5'
+                ? 'bg-amber-400 text-slate-950 font-extrabold px-4 py-2 rounded-full shadow-lg shadow-amber-400/25 text-xs gap-1.5'
                 : 'text-emerald-300/70 hover:text-white flex-col py-1 text-[10px] font-medium'
             }`}
           >
@@ -161,14 +181,15 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span className={activeTab === 'prayer' ? 'inline' : 'block text-[9px] mt-0.5'}>
               Home
             </span>
-          </button>
+          </motion.button>
 
           {/* 2. Qibla Compass */}
-          <button
+          <motion.button
+            whileTap={{ scale: 0.9 }}
             onClick={() => onTabChange('qibla')}
-            className={`flex items-center justify-center transition-all ${
+            className={`flex items-center justify-center transition-all cursor-pointer ${
               activeTab === 'qibla'
-                ? 'bg-amber-400 text-slate-950 font-extrabold px-4 py-2 rounded-full shadow-lg shadow-amber-400/20 text-xs gap-1.5'
+                ? 'bg-amber-400 text-slate-950 font-extrabold px-4 py-2 rounded-full shadow-lg shadow-amber-400/25 text-xs gap-1.5'
                 : 'text-emerald-300/70 hover:text-white flex-col py-1 text-[10px] font-medium'
             }`}
           >
@@ -176,14 +197,15 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span className={activeTab === 'qibla' ? 'inline' : 'block text-[9px] mt-0.5'}>
               Kiblat
             </span>
-          </button>
+          </motion.button>
 
           {/* 3. Al-Quran */}
-          <button
+          <motion.button
+            whileTap={{ scale: 0.9 }}
             onClick={() => onTabChange('quran')}
-            className={`flex items-center justify-center transition-all ${
+            className={`flex items-center justify-center transition-all cursor-pointer ${
               activeTab === 'quran'
-                ? 'bg-amber-400 text-slate-950 font-extrabold px-4 py-2 rounded-full shadow-lg shadow-amber-400/20 text-xs gap-1.5'
+                ? 'bg-amber-400 text-slate-950 font-extrabold px-4 py-2 rounded-full shadow-lg shadow-amber-400/25 text-xs gap-1.5'
                 : 'text-emerald-300/70 hover:text-white flex-col py-1 text-[10px] font-medium'
             }`}
           >
@@ -191,14 +213,15 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span className={activeTab === 'quran' ? 'inline' : 'block text-[9px] mt-0.5'}>
               Al-Quran
             </span>
-          </button>
+          </motion.button>
 
           {/* 4. Tasbih */}
-          <button
+          <motion.button
+            whileTap={{ scale: 0.9 }}
             onClick={() => onTabChange('tasbih')}
-            className={`flex items-center justify-center transition-all ${
+            className={`flex items-center justify-center transition-all cursor-pointer ${
               activeTab === 'tasbih'
-                ? 'bg-amber-400 text-slate-950 font-extrabold px-3.5 py-1.5 rounded-full shadow-lg shadow-amber-400/20 text-xs gap-1.5'
+                ? 'bg-amber-400 text-slate-950 font-extrabold px-3.5 py-1.5 rounded-full shadow-lg shadow-amber-400/25 text-xs gap-1.5'
                 : 'text-emerald-300/70 hover:text-white flex-col py-1 text-[10px] font-medium'
             }`}
           >
@@ -206,14 +229,15 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span className={activeTab === 'tasbih' ? 'inline' : 'block text-[9px] mt-0.5'}>
               Tasbih
             </span>
-          </button>
+          </motion.button>
 
           {/* 5. Kuis Islami */}
-          <button
+          <motion.button
+            whileTap={{ scale: 0.9 }}
             onClick={() => onTabChange('quiz')}
-            className={`flex items-center justify-center transition-all ${
+            className={`flex items-center justify-center transition-all cursor-pointer ${
               activeTab === 'quiz'
-                ? 'bg-amber-400 text-slate-950 font-extrabold px-3 py-1.5 rounded-full shadow-lg shadow-amber-400/20 text-xs gap-1'
+                ? 'bg-amber-400 text-slate-950 font-extrabold px-3 py-1.5 rounded-full shadow-lg shadow-amber-400/25 text-xs gap-1'
                 : 'text-emerald-300/70 hover:text-white flex-col py-1 text-[10px] font-medium'
             }`}
           >
@@ -221,14 +245,15 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span className={activeTab === 'quiz' ? 'inline' : 'block text-[9px] mt-0.5'}>
               Kuis
             </span>
-          </button>
+          </motion.button>
 
           {/* 6. Panduan Umroh */}
-          <button
+          <motion.button
+            whileTap={{ scale: 0.9 }}
             onClick={() => onTabChange('umrah')}
-            className={`flex items-center justify-center transition-all ${
+            className={`flex items-center justify-center transition-all cursor-pointer ${
               activeTab === 'umrah'
-                ? 'bg-amber-400 text-slate-950 font-extrabold px-3 py-1.5 rounded-full shadow-lg shadow-amber-400/20 text-xs gap-1'
+                ? 'bg-amber-400 text-slate-950 font-extrabold px-3 py-1.5 rounded-full shadow-lg shadow-amber-400/25 text-xs gap-1'
                 : 'text-emerald-300/70 hover:text-white flex-col py-1 text-[10px] font-medium'
             }`}
           >
@@ -236,14 +261,15 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span className={activeTab === 'umrah' ? 'inline' : 'block text-[9px] mt-0.5'}>
               Umroh
             </span>
-          </button>
+          </motion.button>
 
           {/* 7. More / Doa & Menu */}
-          <button
+          <motion.button
+            whileTap={{ scale: 0.9 }}
             onClick={() => onTabChange('duas')}
-            className={`flex items-center justify-center transition-all ${
+            className={`flex items-center justify-center transition-all cursor-pointer ${
               activeTab === 'duas'
-                ? 'bg-amber-400 text-slate-950 font-extrabold px-3 py-1.5 rounded-full shadow-lg shadow-amber-400/20 text-xs gap-1'
+                ? 'bg-amber-400 text-slate-950 font-extrabold px-3 py-1.5 rounded-full shadow-lg shadow-amber-400/25 text-xs gap-1'
                 : 'text-emerald-300/70 hover:text-white flex-col py-1 text-[10px] font-medium'
             }`}
           >
@@ -251,9 +277,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span className={activeTab === 'duas' ? 'inline' : 'block text-[9px] mt-0.5'}>
               Menu
             </span>
-          </button>
+          </motion.button>
         </div>
       </div>
+
     </>
   );
 };

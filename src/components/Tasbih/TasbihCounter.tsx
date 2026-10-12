@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { DHIKR_PRESETS } from '../../data/dailyDuas';
 import { DhikrPreset } from '../../types/dhikr';
 import { soundManager } from '../../utils/audioService';
@@ -154,22 +155,35 @@ export const TasbihCounter: React.FC<TasbihCounterProps> = ({ onBack }) => {
 
         {/* Giant Glowing Digital Readout: 038 */}
         <div className="my-3">
-          <span className="text-7xl sm:text-8xl font-black text-emerald-400 font-mono tracking-wider tabular-nums drop-shadow-[0_0_20px_rgba(52,211,153,0.3)] select-none">
+          <motion.span
+            key={count}
+            initial={{ scale: 1.12, opacity: 0.8 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ type: 'spring', stiffness: 450, damping: 25 }}
+            className="text-7xl sm:text-8xl font-black text-emerald-400 font-mono tracking-wider tabular-nums drop-shadow-[0_0_20px_rgba(52,211,153,0.3)] select-none inline-block"
+          >
             {formattedDigits}
-          </span>
+          </motion.span>
         </div>
 
         {/* Big Tactile Tap Circle Button */}
         <div className="relative my-3">
-          <button
+          {/* Subtle pulsating aura behind button */}
+          <motion.div
+            animate={{ scale: [1, 1.1, 1], opacity: [0.15, 0.35, 0.15] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+            className="absolute inset-0 rounded-full bg-amber-400 blur-xl pointer-events-none"
+          />
+          <motion.button
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.91 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 20 }}
             onClick={handleIncrement}
-            className={`w-36 h-36 rounded-full bg-gradient-to-tr from-amber-500 via-amber-400 to-yellow-300 text-slate-950 font-black shadow-xl shadow-amber-500/20 flex flex-col items-center justify-center transition-all select-none active:scale-95 focus:outline-none ${
-              isPressing ? 'scale-90 shadow-inner' : 'hover:scale-105'
-            }`}
+            className="relative w-36 h-36 rounded-full bg-gradient-to-tr from-amber-500 via-amber-400 to-yellow-300 text-slate-950 font-black shadow-xl shadow-amber-500/25 flex flex-col items-center justify-center transition-shadow select-none focus:outline-none cursor-pointer"
           >
             <span className="text-sm uppercase tracking-wider font-extrabold">TEKAN</span>
             <span className="text-[10px] text-slate-800 font-medium">atau Spasi</span>
-          </button>
+          </motion.button>
         </div>
 
         {/* Bottom bar inside card: Reset & Progress */}

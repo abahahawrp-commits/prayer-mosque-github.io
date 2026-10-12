@@ -4,6 +4,7 @@
  */
 
 import React, { useState, useEffect, useMemo } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Navbar, NavTab } from './components/Navbar';
 import { HomeScreen } from './components/Home/HomeScreen';
 import { PrayerHero } from './components/PrayerTimes/PrayerHero';
@@ -309,128 +310,166 @@ export default function App() {
       />
 
       {/* Active Prayer Time Banner Alert */}
-      {activePrayerAlert && (
-        <div className="bg-gradient-to-r from-emerald-800 via-teal-800 to-slate-900 text-white px-4 py-3 border-b border-emerald-700/50 shadow-md sticky top-16 z-30">
-          <div className="max-w-md mx-auto flex items-center justify-between gap-3">
-            <div className="flex items-center gap-2.5">
-              <div className="p-2 rounded-xl bg-amber-400 text-slate-950 font-bold animate-bounce">
-                <Bell className="w-4 h-4 fill-current" />
-              </div>
-              <div>
-                <span className="font-bold text-xs sm:text-sm block">
-                  Waktu {activePrayerAlert.displayName} Telah Tiba ({activePrayerAlert.time})
-                </span>
-                <span className="text-[11px] text-emerald-200/80 block">
-                  Wilayah {location.city}. Mari bersiap sholat.
-                </span>
+      <AnimatePresence>
+        {activePrayerAlert && (
+          <motion.div
+            initial={{ opacity: 0, height: 0, y: -16 }}
+            animate={{ opacity: 1, height: 'auto', y: 0 }}
+            exit={{ opacity: 0, height: 0, y: -16 }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="overflow-hidden bg-gradient-to-r from-emerald-800 via-teal-800 to-slate-900 text-white border-b border-emerald-700/50 shadow-md sticky top-16 z-30"
+          >
+            <div className="px-4 py-3">
+              <div className="max-w-md mx-auto flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2.5">
+                  <div className="p-2 rounded-xl bg-amber-400 text-slate-950 font-bold animate-bounce">
+                    <Bell className="w-4 h-4 fill-current" />
+                  </div>
+                  <div>
+                    <span className="font-bold text-xs sm:text-sm block">
+                      Waktu {activePrayerAlert.displayName} Telah Tiba ({activePrayerAlert.time})
+                    </span>
+                    <span className="text-[11px] text-emerald-200/80 block">
+                      Wilayah {location.city}. Mari bersiap sholat.
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-1.5 shrink-0">
+                  <button
+                    onClick={() => soundManager.playAdhanStream()}
+                    className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-amber-400 text-slate-950 font-bold text-xs transition-colors shadow-sm cursor-pointer"
+                  >
+                    <Volume2 className="w-3 h-3" />
+                    <span>Adzan</span>
+                  </button>
+                  <button
+                    onClick={() => setActivePrayerAlert(null)}
+                    className="p-1 rounded-lg text-emerald-300 hover:text-white cursor-pointer"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
             </div>
-
-            <div className="flex items-center gap-1.5 shrink-0">
-              <button
-                onClick={() => soundManager.playAdhanStream()}
-                className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-amber-400 text-slate-950 font-bold text-xs transition-colors shadow-sm"
-              >
-                <Volume2 className="w-3 h-3" />
-                <span>Adzan</span>
-              </button>
-              <button
-                onClick={() => setActivePrayerAlert(null)}
-                className="p-1 rounded-lg text-emerald-300 hover:text-white"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Main Content Area */}
-      <main className="flex-1 max-w-xl w-full mx-auto px-4 pt-3 sm:pt-5 pb-24">
-        {activeTab === 'prayer' && (
-          <HomeScreen
-            prayerTimes={prayerTimes}
-            nextPrayer={nextPrayer}
-            hijriDate={hijriDate}
-            currentDate={currentDate}
-            location={location}
-            reminders={reminders}
-            onToggleReminder={handleToggleReminder}
-            onNavigate={(tab, subSection) => {
-              setActiveTab(tab);
-              if (subSection) {
-                setDuasInitialSection(subSection);
-              }
-              if (tab === 'quran') {
-                setSelectedSurahNumber(null);
-                setInitialAyahNumber(undefined);
-              }
-            }}
-            onOpenLocationModal={() => setIsLocationModalOpen(true)}
-            onOpenMonthlyModal={() => setIsMonthlyModalOpen(true)}
-            onOpenSettings={() => setIsSettingsModalOpen(true)}
-          />
+          </motion.div>
         )}
+      </AnimatePresence>
 
-        {activeTab === 'qibla' && (
-          <QiblaCompass
-            location={location}
-            onOpenLocationModal={() => setIsLocationModalOpen(true)}
-            onBack={() => setActiveTab('prayer')}
-          />
-        )}
-
-        {activeTab === 'quran' && (
-          <div>
-            {selectedSurahNumber ? (
-              <SurahDetail
-                surahNumber={selectedSurahNumber}
-                initialAyahNumber={initialAyahNumber}
-                onBack={() => {
-                  setSelectedSurahNumber(null);
-                  setInitialAyahNumber(undefined);
+      {/* Main Content Area with Smooth Page Transition */}
+      <main className="flex-1 max-w-xl w-full mx-auto px-4 pt-3 sm:pt-5 pb-24 overflow-hidden">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 14, filter: 'blur(3px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            exit={{ opacity: 0, y: -10, filter: 'blur(3px)' }}
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {activeTab === 'prayer' && (
+              <HomeScreen
+                prayerTimes={prayerTimes}
+                nextPrayer={nextPrayer}
+                hijriDate={hijriDate}
+                currentDate={currentDate}
+                location={location}
+                reminders={reminders}
+                onToggleReminder={handleToggleReminder}
+                onNavigate={(tab, subSection) => {
+                  setActiveTab(tab);
+                  if (subSection) {
+                    setDuasInitialSection(subSection);
+                  }
+                  if (tab === 'quran') {
+                    setSelectedSurahNumber(null);
+                    setInitialAyahNumber(undefined);
+                  }
                 }}
-                onSelectSurah={(num) => {
-                  setSelectedSurahNumber(num);
-                  setInitialAyahNumber(undefined);
-                }}
-                bookmarks={bookmarks}
-                onToggleBookmark={handleToggleBookmark}
-                onSaveLastRead={handleSaveLastRead}
+                onOpenLocationModal={() => setIsLocationModalOpen(true)}
+                onOpenMonthlyModal={() => setIsMonthlyModalOpen(true)}
+                onOpenSettings={() => setIsSettingsModalOpen(true)}
               />
-            ) : (
-              <QuranHome
-                onSelectSurah={(num) => setSelectedSurahNumber(num)}
-                bookmarks={bookmarks}
-                lastRead={lastRead}
-                onSelectBookmark={(surahNum, ayahNum) => {
-                  setSelectedSurahNumber(surahNum);
-                  setInitialAyahNumber(ayahNum);
-                }}
+            )}
+
+            {activeTab === 'qibla' && (
+              <QiblaCompass
+                location={location}
+                onOpenLocationModal={() => setIsLocationModalOpen(true)}
                 onBack={() => setActiveTab('prayer')}
               />
             )}
-          </div>
-        )}
 
-        {activeTab === 'tasbih' && (
-          <TasbihCounter onBack={() => setActiveTab('prayer')} />
-        )}
+            {activeTab === 'quran' && (
+              <div>
+                <AnimatePresence mode="wait">
+                  {selectedSurahNumber ? (
+                    <motion.div
+                      key="surah-detail"
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -20 }}
+                      transition={{ duration: 0.25, ease: 'easeInOut' }}
+                    >
+                      <SurahDetail
+                        surahNumber={selectedSurahNumber}
+                        initialAyahNumber={initialAyahNumber}
+                        onBack={() => {
+                          setSelectedSurahNumber(null);
+                          setInitialAyahNumber(undefined);
+                        }}
+                        onSelectSurah={(num) => {
+                          setSelectedSurahNumber(num);
+                          setInitialAyahNumber(undefined);
+                        }}
+                        bookmarks={bookmarks}
+                        onToggleBookmark={handleToggleBookmark}
+                        onSaveLastRead={handleSaveLastRead}
+                      />
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="quran-home"
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: 20 }}
+                      transition={{ duration: 0.25, ease: 'easeInOut' }}
+                    >
+                      <QuranHome
+                        onSelectSurah={(num) => setSelectedSurahNumber(num)}
+                        bookmarks={bookmarks}
+                        lastRead={lastRead}
+                        onSelectBookmark={(surahNum, ayahNum) => {
+                          setSelectedSurahNumber(surahNum);
+                          setInitialAyahNumber(ayahNum);
+                        }}
+                        onBack={() => setActiveTab('prayer')}
+                      />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            )}
 
-        {activeTab === 'duas' && (
-          <DuasAndAsmaulHusna
-            initialSection={duasInitialSection}
-            onBack={() => setActiveTab('prayer')}
-          />
-        )}
+            {activeTab === 'tasbih' && (
+              <TasbihCounter onBack={() => setActiveTab('prayer')} />
+            )}
 
-        {activeTab === 'quiz' && (
-          <IslamicQuiz onBack={() => setActiveTab('prayer')} />
-        )}
+            {activeTab === 'duas' && (
+              <DuasAndAsmaulHusna
+                initialSection={duasInitialSection}
+                onBack={() => setActiveTab('prayer')}
+              />
+            )}
 
-        {activeTab === 'umrah' && (
-          <UmrahGuide onBack={() => setActiveTab('prayer')} />
-        )}
+            {activeTab === 'quiz' && (
+              <IslamicQuiz onBack={() => setActiveTab('prayer')} />
+            )}
+
+            {activeTab === 'umrah' && (
+              <UmrahGuide onBack={() => setActiveTab('prayer')} />
+            )}
+          </motion.div>
+        </AnimatePresence>
       </main>
 
       {/* Footer */}
@@ -479,3 +518,4 @@ export default function App() {
     </div>
   );
 }
+

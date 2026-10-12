@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { LocationInfo } from '../../types/prayer';
 import { POPULAR_CITIES } from '../../data/cities';
 import { X, Search, MapPin, Navigation, Check } from 'lucide-react';
@@ -26,8 +27,6 @@ export const LocationSelectorModal: React.FC<LocationSelectorModalProps> = ({
   const [customCity, setCustomCity] = useState('');
   const [showCustomInput, setShowCustomInput] = useState(false);
 
-  if (!isOpen) return null;
-
   const filteredCities = POPULAR_CITIES.filter(
     (c) =>
       c.city.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -52,8 +51,24 @@ export const LocationSelectorModal: React.FC<LocationSelectorModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-      <div className="bg-[#0c251f] w-full max-w-lg rounded-3xl shadow-2xl border border-emerald-900/80 text-white overflow-hidden flex flex-col max-h-[85vh]">
+    <AnimatePresence>
+      {isOpen && (
+        <div className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={onClose}
+            className="fixed inset-0 bg-slate-950/80 backdrop-blur-md cursor-pointer"
+          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.94, y: 16 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 12 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 320 }}
+            className="relative bg-[#0c251f] w-full max-w-lg rounded-3xl shadow-2xl border border-emerald-900/80 text-white overflow-hidden flex flex-col max-h-[85vh] z-10"
+          >
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-emerald-900/60 bg-[#12312b]">
           <div className="flex items-center gap-2.5">
@@ -191,7 +206,9 @@ export const LocationSelectorModal: React.FC<LocationSelectorModalProps> = ({
             </form>
           )}
         </div>
+        </motion.div>
       </div>
-    </div>
+      )}
+    </AnimatePresence>
   );
 };

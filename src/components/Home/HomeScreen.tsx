@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'motion/react';
 import {
   PrayerTimeData,
   PrayerName,
@@ -322,9 +323,11 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
       {/* 8 Quick Feature Grid Tiles */}
       <div className="grid grid-cols-4 gap-2 sm:gap-3">
         {/* 1. Tasbih */}
-        <button
+        <motion.button
+          whileHover={{ scale: 1.05, y: -2 }}
+          whileTap={{ scale: 0.93 }}
           onClick={() => onNavigate('tasbih')}
-          className="bg-white hover:bg-slate-50 text-slate-800 rounded-2xl p-2.5 sm:p-3 shadow-sm border border-slate-100 flex flex-col items-center justify-center gap-1.5 transition-transform active:scale-95 group"
+          className="bg-white hover:bg-slate-50 text-slate-800 rounded-2xl p-2.5 sm:p-3 shadow-sm border border-slate-100 flex flex-col items-center justify-center gap-1.5 transition-shadow cursor-pointer group"
         >
           <div className="w-9 h-9 rounded-xl bg-amber-50 group-hover:bg-amber-100 flex items-center justify-center text-amber-500 transition-colors">
             <span className="text-lg">📿</span>
@@ -332,12 +335,14 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           <span className="text-[11px] sm:text-xs font-bold tracking-tight text-slate-800">
             Tasbih
           </span>
-        </button>
+        </motion.button>
 
         {/* 2. Panduan Umroh */}
-        <button
+        <motion.button
+          whileHover={{ scale: 1.05, y: -2 }}
+          whileTap={{ scale: 0.93 }}
           onClick={() => onNavigate('umrah')}
-          className="bg-white hover:bg-slate-50 text-slate-800 rounded-2xl p-2.5 sm:p-3 shadow-sm border border-slate-100 flex flex-col items-center justify-center gap-1.5 transition-transform active:scale-95 group"
+          className="bg-white hover:bg-slate-50 text-slate-800 rounded-2xl p-2.5 sm:p-3 shadow-sm border border-slate-100 flex flex-col items-center justify-center gap-1.5 transition-shadow cursor-pointer group"
         >
           <div className="w-9 h-9 rounded-xl bg-emerald-50 group-hover:bg-emerald-100 flex items-center justify-center text-emerald-600 transition-colors">
             <span className="text-lg">🕋</span>
@@ -345,12 +350,14 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           <span className="text-[11px] sm:text-xs font-bold tracking-tight text-slate-800">
             Umroh
           </span>
-        </button>
+        </motion.button>
 
         {/* 3. Doa Harian */}
-        <button
+        <motion.button
+          whileHover={{ scale: 1.05, y: -2 }}
+          whileTap={{ scale: 0.93 }}
           onClick={() => onNavigate('duas', 'duas')}
-          className="bg-white hover:bg-slate-50 text-slate-800 rounded-2xl p-2.5 sm:p-3 shadow-sm border border-slate-100 flex flex-col items-center justify-center gap-1.5 transition-transform active:scale-95 group"
+          className="bg-white hover:bg-slate-50 text-slate-800 rounded-2xl p-2.5 sm:p-3 shadow-sm border border-slate-100 flex flex-col items-center justify-center gap-1.5 transition-shadow cursor-pointer group"
         >
           <div className="w-9 h-9 rounded-xl bg-purple-50 group-hover:bg-purple-100 flex items-center justify-center text-purple-600 transition-colors">
             <span className="text-lg">🤲</span>
@@ -358,12 +365,14 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           <span className="text-[11px] sm:text-xs font-bold tracking-tight text-slate-800">
             Doa
           </span>
-        </button>
+        </motion.button>
 
         {/* 4. Al-Quran */}
-        <button
+        <motion.button
+          whileHover={{ scale: 1.05, y: -2 }}
+          whileTap={{ scale: 0.93 }}
           onClick={() => onNavigate('quran')}
-          className="bg-white hover:bg-slate-50 text-slate-800 rounded-2xl p-2.5 sm:p-3 shadow-sm border border-slate-100 flex flex-col items-center justify-center gap-1.5 transition-transform active:scale-95 group"
+          className="bg-white hover:bg-slate-50 text-slate-800 rounded-2xl p-2.5 sm:p-3 shadow-sm border border-slate-100 flex flex-col items-center justify-center gap-1.5 transition-shadow cursor-pointer group"
         >
           <div className="w-9 h-9 rounded-xl bg-teal-50 group-hover:bg-teal-100 flex items-center justify-center text-teal-600 transition-colors">
             <BookOpen className="w-4 h-4 text-teal-600" />
@@ -371,12 +380,14 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           <span className="text-[11px] sm:text-xs font-bold tracking-tight text-slate-800">
             Al-Quran
           </span>
-        </button>
+        </motion.button>
 
         {/* 5. Asmaul Husna */}
-        <button
+        <motion.button
+          whileHover={{ scale: 1.05, y: -2 }}
+          whileTap={{ scale: 0.93 }}
           onClick={() => onNavigate('duas', 'asmaulHusna')}
-          className="bg-white hover:bg-slate-50 text-slate-800 rounded-2xl p-2.5 sm:p-3 shadow-sm border border-slate-100 flex flex-col items-center justify-center gap-1.5 transition-transform active:scale-95 group"
+          className="bg-white hover:bg-slate-50 text-slate-800 rounded-2xl p-2.5 sm:p-3 shadow-sm border border-slate-100 flex flex-col items-center justify-center gap-1.5 transition-shadow cursor-pointer group"
         >
           <div className="w-9 h-9 rounded-xl bg-amber-50 group-hover:bg-amber-100 flex items-center justify-center text-amber-600 transition-colors">
             <Sparkles className="w-4 h-4 text-amber-600" />
@@ -384,12 +395,14 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           <span className="text-[11px] sm:text-xs font-bold tracking-tight text-slate-800 truncate max-w-full">
             Asmaul
           </span>
-        </button>
+        </motion.button>
 
         {/* 6. Arah Kiblat */}
-        <button
+        <motion.button
+          whileHover={{ scale: 1.05, y: -2 }}
+          whileTap={{ scale: 0.93 }}
           onClick={() => onNavigate('qibla')}
-          className="bg-white hover:bg-slate-50 text-slate-800 rounded-2xl p-2.5 sm:p-3 shadow-sm border border-slate-100 flex flex-col items-center justify-center gap-1.5 transition-transform active:scale-95 group"
+          className="bg-white hover:bg-slate-50 text-slate-800 rounded-2xl p-2.5 sm:p-3 shadow-sm border border-slate-100 flex flex-col items-center justify-center gap-1.5 transition-shadow cursor-pointer group"
         >
           <div className="w-9 h-9 rounded-xl bg-orange-50 group-hover:bg-orange-100 flex items-center justify-center text-orange-600 transition-colors">
             <Compass className="w-4 h-4 text-orange-600" />
@@ -397,12 +410,14 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           <span className="text-[11px] sm:text-xs font-bold tracking-tight text-slate-800">
             Kiblat
           </span>
-        </button>
+        </motion.button>
 
         {/* 7. Jadwal Bulanan / Imsakiyah */}
-        <button
+        <motion.button
+          whileHover={{ scale: 1.05, y: -2 }}
+          whileTap={{ scale: 0.93 }}
           onClick={onOpenMonthlyModal}
-          className="bg-white hover:bg-slate-50 text-slate-800 rounded-2xl p-2.5 sm:p-3 shadow-sm border border-slate-100 flex flex-col items-center justify-center gap-1.5 transition-transform active:scale-95 group"
+          className="bg-white hover:bg-slate-50 text-slate-800 rounded-2xl p-2.5 sm:p-3 shadow-sm border border-slate-100 flex flex-col items-center justify-center gap-1.5 transition-shadow cursor-pointer group"
         >
           <div className="w-9 h-9 rounded-xl bg-blue-50 group-hover:bg-blue-100 flex items-center justify-center text-blue-600 transition-colors">
             <Calendar className="w-4 h-4 text-blue-600" />
@@ -410,12 +425,14 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           <span className="text-[11px] sm:text-xs font-bold tracking-tight text-slate-800">
             Bulanan
           </span>
-        </button>
+        </motion.button>
 
         {/* 8. Kuis Islami */}
-        <button
+        <motion.button
+          whileHover={{ scale: 1.05, y: -2 }}
+          whileTap={{ scale: 0.93 }}
           onClick={() => onNavigate('quiz')}
-          className="bg-white hover:bg-slate-50 text-slate-800 rounded-2xl p-2.5 sm:p-3 shadow-sm border border-slate-100 flex flex-col items-center justify-center gap-1.5 transition-transform active:scale-95 group"
+          className="bg-white hover:bg-slate-50 text-slate-800 rounded-2xl p-2.5 sm:p-3 shadow-sm border border-slate-100 flex flex-col items-center justify-center gap-1.5 transition-shadow cursor-pointer group"
         >
           <div className="w-9 h-9 rounded-xl bg-rose-50 group-hover:bg-rose-100 flex items-center justify-center text-rose-600 transition-colors">
             <Trophy className="w-4 h-4 text-rose-600" />
@@ -423,15 +440,17 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           <span className="text-[11px] sm:text-xs font-bold tracking-tight text-slate-800">
             Kuis
           </span>
-        </button>
+        </motion.button>
       </div>
 
       {/* Featured Cards Row: Umrah Guide & Interactive Quiz */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {/* Featured Umrah Guide Card */}
-        <div
+        <motion.div
+          whileHover={{ scale: 1.02, y: -2 }}
+          whileTap={{ scale: 0.98 }}
           onClick={() => onNavigate('umrah')}
-          className="rounded-3xl bg-gradient-to-r from-[#173d32] via-[#102d24] to-[#0a1f1a] border border-amber-400/50 p-4 text-white shadow-lg relative overflow-hidden cursor-pointer group hover:border-amber-400 transition-all active:scale-[0.99]"
+          className="rounded-3xl bg-gradient-to-r from-[#173d32] via-[#102d24] to-[#0a1f1a] border border-amber-400/50 p-4 text-white shadow-lg relative overflow-hidden cursor-pointer group hover:border-amber-400 transition-all"
         >
           <div className="flex items-center justify-between relative z-10">
             <div className="flex items-center gap-3 min-w-0 pr-2">
@@ -456,12 +475,14 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
               <ChevronRight className="w-4 h-4 stroke-[3]" />
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Featured Interactive Quiz Challenge Card */}
-        <div
+        <motion.div
+          whileHover={{ scale: 1.02, y: -2 }}
+          whileTap={{ scale: 0.98 }}
           onClick={() => onNavigate('quiz')}
-          className="rounded-3xl bg-gradient-to-r from-[#12312b] via-[#0e2923] to-[#0a1e19] border border-emerald-700/60 p-4 text-white shadow-lg relative overflow-hidden cursor-pointer group hover:border-amber-400 transition-all active:scale-[0.99]"
+          className="rounded-3xl bg-gradient-to-r from-[#12312b] via-[#0e2923] to-[#0a1e19] border border-emerald-700/60 p-4 text-white shadow-lg relative overflow-hidden cursor-pointer group hover:border-amber-400 transition-all"
         >
           <div className="flex items-center justify-between relative z-10">
             <div className="flex items-center gap-3 min-w-0 pr-2">
@@ -486,7 +507,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
               <ChevronRight className="w-4 h-4 stroke-[3]" />
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       {/* Namaz Timings / Jadwal Sholat Container (matching image.png dark teal box) */}

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { CalculationSettings, CalculationMethod, PrayerName } from '../../types/prayer';
 import { CALCULATION_METHODS } from '../../utils/prayerTimes';
 import { notificationService } from '../../utils/notificationService';
-import { X, Sliders, Check, Bell, BellRing, BellOff, Volume2, Info, Smartphone, CloudLightning } from 'lucide-react';
+import { X, Sliders, Check, Bell, BellRing, BellOff, Volume2, Info, Smartphone, CloudLightning, Sparkles } from 'lucide-react';
 import { PWAInstallButton } from '../PWA/PWAInstallButton';
 
 interface CalculationSettingsModalProps {
@@ -46,8 +47,6 @@ export const CalculationSettingsModal: React.FC<CalculationSettingsModalProps> =
     }
   };
 
-  if (!isOpen) return null;
-
   const handleMethodChange = (method: CalculationMethod) => {
     const meta = CALCULATION_METHODS[method];
     onUpdateSettings({
@@ -89,8 +88,24 @@ export const CalculationSettingsModal: React.FC<CalculationSettingsModalProps> =
   ];
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-      <div className="bg-[#0c251f] w-full max-w-lg rounded-3xl shadow-2xl border border-emerald-900/80 text-white overflow-hidden flex flex-col max-h-[90vh]">
+    <AnimatePresence>
+      {isOpen && (
+        <div className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={onClose}
+            className="fixed inset-0 bg-slate-950/80 backdrop-blur-md cursor-pointer"
+          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.94, y: 16 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 12 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 320 }}
+            className="relative bg-[#0c251f] w-full max-w-lg rounded-3xl shadow-2xl border border-emerald-900/80 text-white overflow-hidden flex flex-col max-h-[90vh] z-10"
+          >
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-emerald-900/60 bg-[#12312b]">
           <div className="flex items-center gap-2.5">
@@ -331,13 +346,15 @@ export const CalculationSettingsModal: React.FC<CalculationSettingsModalProps> =
         <div className="px-6 py-4 border-t border-emerald-900/60 bg-[#12312b] flex justify-end">
           <button
             onClick={onClose}
-            className="px-5 py-2 text-xs font-bold text-slate-950 bg-amber-400 hover:bg-amber-300 rounded-xl transition-colors shadow-sm"
+            className="px-5 py-2 text-xs font-bold text-slate-950 bg-amber-400 hover:bg-amber-300 rounded-xl transition-colors shadow-sm cursor-pointer"
           >
             Simpan & Tutup
           </button>
         </div>
+        </motion.div>
       </div>
-    </div>
+      )}
+    </AnimatePresence>
   );
 };
 
